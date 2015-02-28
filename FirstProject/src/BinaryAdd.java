@@ -4,7 +4,7 @@ public class BinaryAdd{
 		System.out.println("addition of 17 9 is "+add.add(17,9));
 	}
 
-	private int add(int num1, int num2) {
+	public int add(int num1, int num2) {
 		int sum = 0;
 		int carry = 0;
 		do{
