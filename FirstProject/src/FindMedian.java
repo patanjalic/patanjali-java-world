@@ -3,6 +3,8 @@ import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.TreeSet;
 
+import org.junit.Test;
+
 class SetComparator implements Comparator<Integer>{
 
 	@Override
@@ -20,8 +22,8 @@ class SetComparatorDesc implements Comparator<Integer>{
 	
 }
 public class FindMedian {
-	
-	public static void main(String[] args) {
+	@Test
+	public void main_junk() {
 		SetComparator sc = new SetComparator();
 		TreeSet<Integer> tm = new TreeSet<Integer>(sc);
 		tm.add(1);
@@ -58,7 +60,7 @@ public class FindMedian {
 		else
 			System.out.println("median is "+(pq1.peek() + pq2.peek())/2);
 	}
-
+	
 	private static void insertIntoHeaps(int temp, PriorityQueue<Integer> pq1,
 			PriorityQueue<Integer> pq2) {
 		if(pq1.size() == 0 && pq2.size() == 0){
