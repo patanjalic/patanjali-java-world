@@ -168,7 +168,7 @@ public class LinkedList {
         theItr = theList.zeroth( );
         printList( theList );
         
-        for( i = 0; i < 10; i++ ) {
+        for( i = 1; i < 10; i++ ) {
             theList.insert( new Integer( i ), theItr );
             //printList( theList );
             theItr.advance( );
@@ -185,7 +185,19 @@ public class LinkedList {
 //        System.out.println( "Finished deletions" );
         printList( theList );
         theList.findKthFromLast(4);
+        theList.swapKthNodes(4);
+        printList(theList);
     }
+
+	private void swapKthNodes(int k) {
+		ListNode last = findKthFromLast(k);
+		ListNode head = header;
+		for(int i = 0;i < k; i++)
+			head = head.next;
+		int temp = (int) last.element;
+		last.element = head.element;
+		head.element = temp;
+	}
     
 }
 
