@@ -1,5 +1,7 @@
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.Set;
 
 class Country {
 
@@ -59,7 +61,12 @@ class HashMapDemo{
         countryCapitalMap.put(japan,"Tokyo");
         countryCapitalMap.put(france,"Paris");
         countryCapitalMap.put(russia,"Moscow");
-          
+        Set<Entry<Country,String>> entry = countryCapitalMap.entrySet();
+        Iterator<Entry<Country,String>> it = entry.iterator();
+        while(it.hasNext()){
+        	System.out.println(it.next().getKey());
+        	System.out.println(it.next().getValue());
+        }
         Iterator<Country> countryCapitalIter=countryCapitalMap.keySet().iterator();//put debug point at this line
         while(countryCapitalIter.hasNext())
         {

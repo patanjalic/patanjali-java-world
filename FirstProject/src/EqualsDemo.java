@@ -11,7 +11,9 @@ class Student{
 		isBoy = gender;
 		age = a;
 	}
-
+	public Student(){
+		
+	}
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof Student){
