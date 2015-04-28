@@ -153,7 +153,10 @@ int main()
 	//main_access_private();
 	//main_iterator_demo();
 	//main_weak_ptr_demo();
-	main_stl_ctor();
+	//main_stl_ctor();
+	//main_bst();
+	//main_scoped_ptr_demo();
+	main_dll_checkpalin();
 	//cin.ignore();
 	cin.get();
 	return 0;

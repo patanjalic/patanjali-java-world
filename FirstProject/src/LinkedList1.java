@@ -1,20 +1,20 @@
-// LinkedList class
+// LinkedList1 class
 //
 // CONSTRUCTION: with no initializer
-// Access is via LinkedListIterator class
+// Access is via LinkedList1Iterator class
 //
 // ******************PUBLIC OPERATIONS*********************
 // boolean isEmpty( )     --> Return true if empty; else false
 // void makeEmpty( )      --> Remove all items
-// LinkedListIterator zeroth( )
+// LinkedList1Iterator zeroth( )
 //                        --> Return position to prior to first
-// LinkedListIterator first( )
+// LinkedList1Iterator first( )
 //                        --> Return first position
 // void insert( x, p )    --> Insert x after current iterator position p
 // void remove( x )       --> Remove x
-// LinkedListIterator find( x )
+// LinkedList1Iterator find( x )
 //                        --> Return position that views x
-// LinkedListIterator findPrevious( x )
+// LinkedList1Iterator findPrevious( x )
 //                        --> Return position prior to x
 // ******************ERRORS********************************
 // No special errors
@@ -22,15 +22,15 @@
 /**
  * Linked list implementation of the list
  *    using a header node.
- * Access to the list is via LinkedListIterator.
+ * Access to the list is via LinkedList1Iterator.
  * @author Mark Allen Weiss
- * @see LinkedListIterator
+ * @see LinkedList1Iterator
  */
-public class LinkedList {
+public class LinkedList1 {
     /**
      * Construct the list
      */
-    public LinkedList( ) {
+    public LinkedList1( ) {
         header = new ListNode( null );
     }
     
@@ -52,16 +52,16 @@ public class LinkedList {
     /**
      * Return an iterator representing the header node.
      */
-    public LinkedListIterator zeroth( ) {
-        return new LinkedListIterator( header );
+    public LinkedList1Iterator zeroth( ) {
+        return new LinkedList1Iterator( header );
     }
     
     /**
      * Return an iterator representing the first node in the list.
      * This operation is valid for empty lists.
      */
-    public LinkedListIterator first( ) {
-        return new LinkedListIterator( header.next );
+    public LinkedList1Iterator first( ) {
+        return new LinkedList1Iterator( header.next );
     }
     
     /**
@@ -69,7 +69,7 @@ public class LinkedList {
      * @param x the item to insert.
      * @param p the position prior to the newly inserted item.
      */
-    public void insert( Object x, LinkedListIterator p ) {
+    public void insert( Object x, LinkedList1Iterator p ) {
         if( p != null && p.current != null )
             p.current.next = new ListNode( x, p.current.next );
     }
@@ -79,13 +79,13 @@ public class LinkedList {
      * @param x the item to search for.
      * @return an iterator; iterator is not valid if item is not found.
      */
-    public LinkedListIterator find( Object x ) {
+    public LinkedList1Iterator find( Object x ) {
         ListNode itr = header.next;
         
         while( itr != null && !itr.element.equals( x ) )
             itr = itr.next;
         
-        return new LinkedListIterator( itr );
+        return new LinkedList1Iterator( itr );
     }
     
     /**
@@ -94,13 +94,13 @@ public class LinkedList {
      * @return appropriate iterator if the item is found. Otherwise, the
      * iterator corresponding to the last element in the list is returned.
      */
-    public LinkedListIterator findPrevious( Object x ) {
+    public LinkedList1Iterator findPrevious( Object x ) {
         ListNode itr = header;
         
         while( itr.next != null && !itr.next.element.equals( x ) )
             itr = itr.next;
         
-        return new LinkedListIterator( itr );
+        return new LinkedList1Iterator( itr );
     }
     
     /**
@@ -108,7 +108,7 @@ public class LinkedList {
      * @param x the item to remove.
      */
     public void remove( Object x ) {
-        LinkedListIterator p = findPrevious( x );
+        LinkedList1Iterator p = findPrevious( x );
         
         if( p.current.next != null )
             p.current.next = p.current.next.next;  // Bypass deleted node
@@ -134,11 +134,11 @@ public class LinkedList {
     	return slow;
     }
     // Simple print method
-    public static void printList( LinkedList theList ) {
+    public static void printList( LinkedList1 theList ) {
         if( theList.isEmpty( ) )
             System.out.print( "Empty list" );
         else {
-            LinkedListIterator itr = theList.first( );
+            LinkedList1Iterator itr = theList.first( );
             for( ; itr.isValid( ); itr.advance( ) )
                 System.out.print( itr.retrieve( ) + " " );
         }
@@ -148,10 +148,10 @@ public class LinkedList {
     
     private ListNode header;
     
-    // In this routine, LinkedList and LinkedListIterator are the
+    // In this routine, LinkedList1 and LinkedList1Iterator are the
     // classes written in Section 17.2.
-    public static int listSize( LinkedList theList ) {
-        LinkedListIterator itr;
+    public static int listSize( LinkedList1 theList ) {
+        LinkedList1Iterator itr;
         int size = 0;
         
         for( itr = theList.first(); itr.isValid(); itr.advance() )
@@ -161,8 +161,8 @@ public class LinkedList {
     }
     
     public static void main( String [ ] args ) {
-        LinkedList         theList = new LinkedList( );
-        LinkedListIterator theItr;
+        LinkedList1         theList = new LinkedList1( );
+        LinkedList1Iterator theItr;
         int i;
         
         theItr = theList.zeroth( );
@@ -186,6 +186,7 @@ public class LinkedList {
         printList( theList );
         theList.findKthFromLast(4);
         theList.swapKthNodes(4);
+        theList.moveLastToBegin();
         printList(theList);
     }
 
@@ -198,11 +199,23 @@ public class LinkedList {
 		last.element = head.element;
 		head.element = temp;
 	}
+	
+	private void moveLastToBegin(){
+		ListNode last = null;
+		ListNode head = header;
+		ListNode itr = header;
+		while(itr.next.next != null)
+			itr = itr.next;
+		last = itr.next;
+		itr.next = null;
+		last.next = header.next;
+		header.next = last;
+	}
     
 }
 
 
-// LinkedListIterator class; maintains "current position"
+// LinkedList1Iterator class; maintains "current position"
 //
 // CONSTRUCTION: Package visible only, with a ListNode
 //
@@ -215,14 +228,14 @@ public class LinkedList {
  * Linked list implementation of the list iterator
  *    using a header node.
  * @author Mark Allen Weiss
- * @see LinkedList
+ * @see LinkedList1
  */
-class LinkedListIterator {
+class LinkedList1Iterator {
     /**
      * Construct the list iterator
      * @param theNode any node in the linked list.
      */
-    LinkedListIterator( ListNode theNode ) {
+    LinkedList1Iterator( ListNode theNode ) {
         current = theNode;
     }
     

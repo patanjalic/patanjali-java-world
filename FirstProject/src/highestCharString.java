@@ -13,9 +13,9 @@ class highestCharString{
 	}
 
 	private void findHighest(String s) {
-		//HashMap<Character,Integer> map = new HashMap<Character,Integer>();
+		HashMap<Character,Integer> map = new HashMap<Character,Integer>();
 		
-		TreeMap<Character,Integer> map = new TreeMap<Character,Integer>();
+		//TreeMap<Character,Integer> map = new TreeMap<Character,Integer>();
 		for(int i = 0; i<s.length();i++){
 			if(map.containsKey(s.charAt(i)))
 				map.put(s.charAt(i), map.get(s.charAt(i))+1);
